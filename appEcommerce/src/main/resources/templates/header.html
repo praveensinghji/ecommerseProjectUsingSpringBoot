@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    </head>
+<body>
+    <div th:fragment="myheader">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport"
+                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+                  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+                  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+        </head>
+        <body>
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img th:src="@{/images/logo.png}"  src="../static/images/logo.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/}" href="#">home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                        </li>
+                        <!-- ADMIN Portal -->
+                        <li class="nav-item active">
+                            <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" href="#">Admin Portal</a>
+                        </li>
+
+                        <li class="nav-item active">
+                            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                        </li>
+                        <li class="nav-item active">
+                            <!--                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/login}" href="#">login</a>-->
+                            <div class="dropdown" sec:authorize="isAuthenticated()">
+                                <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span sec:authentication="principal.username"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="#">Add Address</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item active">
+                            <!--                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>-->
+                            <form th:action="@{/logout}" method="post">
+                                <div>
+                                    <input type="submit" class="btn" value="Logout">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                        </li>
+                        <li class="nav-item active">
+                            <span class="nav-link" th:text="${cartCount}">0</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        </body>
+    </div>
+    <div th:replace="footer :: foot"></div>
+</html>

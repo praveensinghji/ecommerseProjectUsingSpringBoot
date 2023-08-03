@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Registration Confirmation</title>
+</head>
+
+<body>
+
+	<h2>User registered successfully!</h2>
+
+	<!-- display first name, last name and email -->
+	<ul>
+		<li th:text="'User name: ' + ${user.userName}"></li>
+		<li th:text="'First name: ' + ${user.firstName}"></li>
+		<li th:text="'Last name: ' + ${user.lastName}"></li>
+		<li th:text="'Email name: ' + ${user.email}"></li>
+	</ul>
+
+	<hr>
+	
+	<a th:href="@{/login}">Login with new user name</a>
+
+	<div th:replace="footer :: foot"></div>
+</body>
+
+</html>

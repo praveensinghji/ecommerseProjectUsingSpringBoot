@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+</head>
+<div th:replace="header :: myheader"></div>
+<body>
+<div class="container">
+    <h3 class="pt-3">Products List</h3>
+    <hr>
+
+    <!-- Add a button-->
+    <a th:href="@{/product-list/showform}" class="btn btn-primary btn-sm mb-3">
+        Add Product
+    </a>
+
+    <table class = "table table-bordered table-striped">
+        <thead class = "table-dark">
+        <tr>
+            <th>Product Title</th>
+            <th>Price</th>
+            <th>Discounted Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "tempProduct : ${productList}">
+            <td th:text="${tempProduct.title}"/>
+            <td th:text="${tempProduct.price}"/>
+            <td th:text="${tempProduct.discountedPrice}"/>
+
+            <td>
+                <a th:href="@{/product-list/showFormForUpdate(productId = ${tempProduct.id})}"
+                   class="btn btn-info btn-sm mx-3">Update</a>
+
+                <a th:href="@{/product-list/delete(productId = ${tempProduct.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure want to delete this employee'))) return false">
+                    Delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="footer :: foot"></div>
+</body>
+</html>

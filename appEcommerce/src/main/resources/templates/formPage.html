@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<div th:replace="header :: myheader"></div>
+<body>
+<div class="container">
+  <h3>Products List</h3>
+  <hr>
+
+  <p class ="h4 mb-4">Save Product</p>
+  <form th:action="@{/product-list/save}" th:object="${product}" method ="POST">
+    <!-- Add hidden field to handel update -->
+    <input type="hidden" th:field="*{id}">
+    <label>Title</label>
+    <input type="text" th:field="*{title}" placeholder="Title" class="form-control mb-4 w-25">
+    <label>Price</label>
+    <input type="number" th:field="*{price}" placeholder="Price" class="form-control mb-4 w-25">
+    <label>Discounted Price </label>
+    <input type="number" th:field="*{discountedPrice}" placeholder="Discounted Price" class="form-control mb-4 w-25">
+
+    <button type="submit" class="btn btn-info col-2">Save</button>
+  </form>
+  <hr>
+  <a th:href="@{/product-list}">Back to Product List</a>
+</div>
+</body>
+
+
+
+
+
+
+
